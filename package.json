@@ -1,0 +1,17 @@
+{
+  "name": "12-employeetracker_paulocondori",
+  "version": "1.0.0",
+  "description": "Using node.js to make an interactive program with inquire to insert data into databases",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paulo Condori",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "inquirer": "^8.2.4",
+    "jshint": "^2.12.0",
+    "mysql2": "^2.2.5"
+  }
+}
