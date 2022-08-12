@@ -6,6 +6,7 @@ const inquirer = require('inquirer');
 const mysqlP = require('mysql2/promise');
 const mysql = require('mysql2');
 const { connect } = require('http2');
+const { response } = require('express');
 // const { addADepart, addARole, addAEmploy, UpdateEmpRole, } = require('./addToTables');
 
 const PORT = process.env.PORT || 3001;
@@ -64,7 +65,7 @@ function viewEmploy() {
 
 
 
-
+//MAIN FUNCTION THAT RUNS ALL THE OPTIONS 
 const OwnerInputs = () => {
   inquirer.prompt([
     {
@@ -100,9 +101,9 @@ const OwnerInputs = () => {
 
     }
 
-    // if (response.options === 'Update an employee role') {
-    //   UpdateEmpRole();
-    // }
+    if (response.options === 'Update an employee role') {
+      UpdateEmpRole();
+    }
 
     if (response.options === 'DONE') {
       console.log('Thank you! Have a great day!')
@@ -208,71 +209,60 @@ function addAEmploy() {
 
 
 
-// function UpdateEmpRole() {
-//   db.query(
-//     'SELECT id, first_name, last_name FROM employees',
-//     function (error, res) {
-//       if (error) {
-//         throw error;
-//       }
-//       let employeeInfo = res.map((SelectedInfo) => {
-//         return {
-//           name: SelectedInfo.first_name,
-//           value: SelectedInfo.last_name
-//         }
-//       })
-//       console.log(employeeInfo)
+function UpdateEmpRole() {
+  db.query(
+    'SELECT id, first_name, last_name FROM employees',
+    function (error, res) {
+      if (error) {
+        throw error;
+      }
+      let employeeInfo = res.map((SelectedInfo) => {
+        return {
+          name: SelectedInfo.first_name,
+          value: SelectedInfo.last_name
+        }
+      })
+      console.log(employeeInfo)
 
-//       connect.query(
-//         'SELECT id,  title FROM role',
-//         function (err, role) {
-//           if (err) {
-//             throw err
-//           }
-//           let roleVals = role.map((roleData) => {
-//             return {
-//               name: roleData.title,
-//               value: roleData.id
-//             }
-//           })
-
-
-
-          //           }
-          //         )
-
-          //       })
-
-
-          // inquirer.prompt([
-          //     {
-          //         type: 'input',
-          //         message: 'Who do you want to make changes for? Enter ID:',
-          //         name: 'idOfEmp',
-          //     },
-          //     {
-          //         type: 'input',
-          //         message: 'New ID of rol:',
-          //         name: 'idOfRole',
-          //     },
-          // ]).then(responses => {
-          //     const sql = `UPDATE employee SET role_id = ? WHERE id ?`;
-          //     const params = [responses.idOfRole, responses.idOfEmp];
-          //     db.query(sql, params, (err, result) => {
-          //         if (err) {
-          //             console.log('Error')
-          //         }
-          //         if (result) {
-          //             console.log('Updates have been made')
-          //         }
-          //     })
-
-          // })
-
-
-          // }
-
-
+      connect.query(
+        'SELECT id,  title FROM role',
+        function (err, role) {
+          if (err) {
+            throw err
+          }
+          let roleVals = role.map((roleData) => {
+            return {
+              name: roleData.title,
+              value: roleData.id
+            }
+          })
+          inquirer.prompt([
+            {
+              type: 'list',
+              message: 'Who do you want to make changes for? Enter ID:',
+              name: 'WhoEmp',
+              choices: employeeInfo
+            },
+            {
+              type: 'input',
+              message: 'What role do you want to assign this employee:',
+              name: 'WRole',
+              choices: roleVals
+            }
+          ]).then(responses => {
+            console.log(responses);
+            connection.query(
+              `UPDATE employee SET role_id = ${answers.WRole} WHERE id = ${answers.WhoEmp}`,
+              function (err, results) {
+                if (err) {
+                  throw err;
+                }
+                // this is basically saying if there is no error tell me the results. 
+                console.table('Updated was successful');
+              })
+          })
+        })}
+      )};
 
 
           OwnerInputs();
