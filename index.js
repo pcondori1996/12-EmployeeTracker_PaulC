@@ -196,7 +196,7 @@ function addAEmploy() {
     //back tik inset $ 
     const EyParams = [responses.firstName, responses.lastName, responses.roleID, responses.managerOfE];
     console.log(EyParams);
-    db.query('INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUES ?', EyParams,
+    db.query('INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUES (?)', EyParams,
       (error, results) => {
         console.log(results)
         if (error) {

@@ -1,5 +1,44 @@
 # 12 SQL: Employee Tracker
 
+## Description
+- Write a file we could update SQL database through the terminal using Inquires
+
+### What was your motivation?
+Databases knowledge is huge in the industry, so I need to understand how to acess and change them
+
+### Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
+SQL and similiar very syntax sensitive, so it was important to get as experience and pratice with it. While the assignment seemed easy, the actual process required a lot of patience and refactoring.
+
+### What problem does it solve?
+Making a program that a user could access and change department and sub table quickly.
+
+### What did you learn?
+Syntax errors cause a lot of headaches. There are better tools now to complete or solve problems. 
+
+## Table of Contents 
+
+-[Installation](#installation)
+-[Usage/Instructions](#Usage/Instructions)
+-[Contributing](#Contributing)
+-[Test](#Test)
+-[Questions](#Questions)
+
+## Installation
+Run node server.js and test it out
+
+## Usage/Instructions
+
+
+## Contributing
+- Paulo Sergio Condori Pinedo
+
+
+#Questions 
+If you have any questions about the repo, open an issue or contact me directly at paulocondori1@gmail.com. You can find more of my work at pcondori1996)
+
+🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆`
+};
+
 ## Your Task
 
 Developers frequently have to create interfaces that allow non-developers to easily view and interact with information stored in databases. These interfaces are called **content management systems (CMS)**. Your assignment this week is to build a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
