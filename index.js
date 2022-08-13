@@ -158,7 +158,7 @@ function addARole() {
   ]).then(responses => {
     const ReParams = [responses.titleName, responses.salary, responses.departForRole];
     console.log(ReParams);
-    db.query("INSERT INTO role(title, salary, department_id) VALUES (?)", ReParams,
+    db.query("INSERT INTO role(title, salary, department_id) VALUES (?, ?, ?)", ReParams,
       (error, results) => {
         console.log(results)
         if (error) {
@@ -196,7 +196,7 @@ function addAEmploy() {
     //back tik inset $ 
     const EyParams = [responses.firstName, responses.lastName, responses.roleID, responses.managerOfE];
     console.log(EyParams);
-    db.query('INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUES (?)', EyParams,
+    db.query('INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', EyParams,
       (error, results) => {
         console.log(results)
         if (error) {
@@ -219,12 +219,12 @@ function UpdateEmpRole() {
       let employeeInfo = res.map((SelectedInfo) => {
         return {
           name: SelectedInfo.first_name,
-          value: SelectedInfo.last_name
+          value: SelectedInfo.id
         }
       })
       console.log(employeeInfo)
 
-      connect.query(
+      db.query(
         'SELECT id,  title FROM role',
         function (err, role) {
           if (err) {
@@ -244,25 +244,25 @@ function UpdateEmpRole() {
               choices: employeeInfo
             },
             {
-              type: 'input',
+              type: 'list',
               message: 'What role do you want to assign this employee:',
               name: 'WRole',
               choices: roleVals
             }
           ]).then(responses => {
             console.log(responses);
-            connection.query(
-              `UPDATE employee SET role_id = ${answers.WRole} WHERE id = ${answers.WhoEmp}`,
+            db.query(
+              'UPDATE employees SET role_id=? Where id=?', [responses.WRole, responses.WhoEmp], 
               function (err, results) {
                 if (err) {
-                  throw err;
+                  console.log('There is an error');
                 }
                 // this is basically saying if there is no error tell me the results. 
-                console.table('Updated was successful');
+                OwnerInputs();
               })
           })
         })}
       )};
 
 
-          OwnerInputs();
+          OwnerInputs()
