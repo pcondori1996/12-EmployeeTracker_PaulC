@@ -27,6 +27,8 @@ Syntax errors cause a lot of headaches. There are better tools now to complete o
 Run node server.js and test it out
 
 ## Usage/Instructions
+[Video of usage](https://drive.google.com/file/d/1CG3YwsSGFr_mqLv-Dwu5gaSH2Ncma6Ju/view)
+I show how i use the code and its functionality.
 
 
 ## Contributing
